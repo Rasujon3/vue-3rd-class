@@ -1,8 +1,9 @@
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref, defineProps, inject } from 'vue'
 
-const props = defineProps(['userName'])
-const userName = ref(props.userName)
+// const props = defineProps(['userName'])
+// const userName = ref(props.userName)
+const userName = inject('userName')
 </script>
 
 <template>

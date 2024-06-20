@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, provide } from 'vue'
 import moment from 'moment'
 import Posts from './components/Posts.vue'
 import CreatePost from './components/CreatePost.vue'
@@ -101,14 +101,20 @@ watch(
   },
   { deep: true }
 )
+
+provide('posts', posts)
 </script>
 
 <template>
   <layoutContent :userName="userName">
-    <CreatePost @postCreate="postCreate" :postCount="posts.length" />
+    <CreatePost
+      @postCreate="postCreate"
+      :postCount="posts.length"
+      class="bg-light p-4"
+      style="border-radius: 5px"
+    />
 
     <Posts
-      :posts="posts"
       @increaseLikeCount="increaseLikeCount"
       @deletePost="deletePost"
       @addComment="addComment"

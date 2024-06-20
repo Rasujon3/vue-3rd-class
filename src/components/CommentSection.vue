@@ -1,18 +1,20 @@
 <script setup>
-import { ref, defineProps, computed, defineEmits, watch } from 'vue'
+import { ref, defineProps, computed, defineEmits, watch, defineModel, inject } from 'vue'
 import moment from 'moment'
 
 const props = defineProps({
-  post: {
-    type: Object,
-    required: true
-  },
+  // post: {
+  //   type: Object,
+  //   required: true
+  // },
   index: {
     type: Number,
     required: true
   }
 })
-const post = ref(props.post)
+// const post = ref(props.post)
+const posts = inject('posts')
+const post = ref(posts.value[props.index])
 
 const emit = defineEmits({
   addComment: null,
@@ -36,6 +38,8 @@ watch(
     }
   }
 )
+
+const commentFormData = defineModel('comment')
 </script>
 
 <template>
@@ -44,7 +48,7 @@ watch(
       <div class="comments-input d-flex mb-3">
         <input
           type="text"
-          v-model="post.commentFormData"
+          v-model="commentFormData"
           class="form-control form-control-sm me-2"
           placeholder="Write Comment"
           required
