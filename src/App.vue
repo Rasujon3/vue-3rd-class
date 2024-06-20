@@ -103,11 +103,17 @@ watch(
 )
 
 provide('posts', posts)
+const currentComponent = ref('posts')
 </script>
 
 <template>
-  <layoutContent :userName="userName">
+  <layoutContent
+    :userName="userName"
+    @changeComponent="(componet) => (currentComponent = componet)"
+    :currentComponent="currentComponent"
+  >
     <CreatePost
+      v-if="currentComponent === 'create-post'"
       @postCreate="postCreate"
       :postCount="posts.length"
       class="bg-light p-4"
@@ -115,6 +121,7 @@ provide('posts', posts)
     />
 
     <Posts
+      v-else-if="currentComponent === 'posts'"
       @increaseLikeCount="increaseLikeCount"
       @deletePost="deletePost"
       @addComment="addComment"

@@ -1,9 +1,12 @@
 <script setup>
-import { ref, defineProps, inject } from 'vue'
+import { ref, defineProps, inject, computed } from 'vue'
 
 // const props = defineProps(['userName'])
 // const userName = ref(props.userName)
 const userName = inject('userName')
+const props = defineProps(['currentComponent'])
+const currentComponent = computed(() => props.currentComponent)
+console.log(currentComponent)
 </script>
 
 <template>
@@ -24,10 +27,21 @@ const userName = inject('userName')
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a
+              :class="{ 'nav-link': true, active: currentComponent === 'posts' }"
+              aria-current="page"
+              href="#"
+              @click="$emit('changeComponent', 'posts')"
+              >Posts</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a
+              :class="{ 'nav-link': true, active: currentComponent === 'create-post' }"
+              href="#"
+              @click="$emit('changeComponent', 'create-post')"
+              >Create Post</a
+            >
           </li>
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
