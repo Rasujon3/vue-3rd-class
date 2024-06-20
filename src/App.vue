@@ -108,7 +108,6 @@ const currentComponent = ref('posts')
 
 <template>
   <layoutContent
-    :userName="userName"
     @changeComponent="(componet) => (currentComponent = componet)"
     :currentComponent="currentComponent"
   >

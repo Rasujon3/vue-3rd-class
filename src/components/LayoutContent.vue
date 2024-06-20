@@ -6,7 +6,6 @@ import { ref, defineProps, inject, computed } from 'vue'
 const userName = inject('userName')
 const props = defineProps(['currentComponent'])
 const currentComponent = computed(() => props.currentComponent)
-console.log(currentComponent)
 </script>
 
 <template>
